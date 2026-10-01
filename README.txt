@@ -2,7 +2,10 @@
                  HOW TO USE THE AUTOGRADER
 ===========================================================
 
-1. Copy THEAutoGrader/ into the HW# folder you are grading.
+0. Open AutoGraderMain/ and do "git pull" to pull most current version
+   of the autograder
+
+1. Copy AutoGraderMain/ into the HW# folder you are grading.
 
    Example:
    AutoGrader/HW4/THEAutoGrader/
@@ -17,9 +20,10 @@
 3. Make sure your MASTER repo is inside the HW# folder.
 
 4. Run run.bat (double-click).
-   Alternatively, open a PowerShell, type "cmd", then cd to the "C:/Users/DEVON/.../AutoGrader/HW#/THEAutoGrader/"
+
+   Alternatively, open a PowerShell, type "cmd", then cd to the "C:/Users/DEVON/.../AutoGrader/HW#/AutoGraderMain/"
    Then Run:
-	node autograder.js
+	   node autograder.js
 
 5. After grading:
    - HW#-PASS.txt contains [PASS] entries like [PASS] Student Name | githubUsername
@@ -60,5 +64,5 @@ When dev is stable enough to become the new autograder:
    2. git merge dev
       - Merge dev branch into main branch
    3. git push
-   
+
    ===========================================================
