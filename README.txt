@@ -18,6 +18,7 @@
    const BASE_FOLDER = "C:/Users/DEVON/.../AutoGrader/HW4/";
 
 3. Make sure your MASTER repo is inside the HW# folder.
+   - Additionally, make sure to do "npm install" in the MASTER repo
 
 4. Run run.bat (double-click).
 
@@ -25,13 +26,16 @@
    Then Run:
 	   node autograder.js
 
+   This allows you to see the console.logs
+
 5. After grading:
    - HW#-PASS.txt contains [PASS] entries like [PASS] Student Name | githubUsername
    - Submissions.txt contains GitHub usernames for tracking
    - HW#-Failed/ contains all failed repos
-   - Failed repo folders use names like hw4-class-methods-MatthewAchenchi
+   - Failed repo folders use names like hw4-class-methods-*GitHub_Username*
    - HW#-Failed/HW#-Failed-Log.txt contains entries like [FAIL] Student Name | githubUsername
    - Only MASTER repo remains in HW#/
+   - RunCnt.txt contains the amount of times the script has been run
 
 ===========================================================
                  DEVELOPMENT BRANCHING
