@@ -11,11 +11,36 @@
    AutoGrader/HW4/THEAutoGrader/
 
 2. Open autograder.js and edit the CONFIG section at the top:
+      (Note: this is an example of what it looks like)
+   
+      const HW_NUMBER = 4; 
+      const REPO_PREFIX = "hw4-class-methods-";
+      const MASTER_REPO_NAME = "hw4-class-methods-MASTER";
+      const BASE_FOLDER = "C:/Users/DEVON/.../AutoGrader/HW4/";
 
-   const HW_NUMBER = 4;
-   const REPO_PREFIX = "hw4-class-methods-";
-   const MASTER_REPO_NAME = "hw4-class-methods-MASTER";
-   const BASE_FOLDER = "C:/Users/DEVON/.../AutoGrader/HW4/";
+   This is what each field means and is used for:
+
+      const HW_NUMBER = 4; 
+         - Replace value with the current HW number.
+         - Used in:
+            1. New file name creation
+
+      const REPO_PREFIX = "hw4-class-methods-";
+         - Replace value with current HW prefix
+         - Used in:
+            1. Renaming failed repos and putting them in HW#-Failed/
+            2. Filtering names of GitHub repos you are colaborating on
+
+      const MASTER_REPO_NAME = "hw4-class-methods-MASTER";
+         - Replace value with name of the repo that all src folders will be coppied into 
+         - Used in:
+            1. Making sure to not clone the starting repo
+            2. Directing src folders into MASTER repo
+            3. Telling what file to do the "npm run test"
+      const BASE_FOLDER = "C:/Users/DEVON/.../AutoGrader/HW4/";
+         - Replace "HW4" part with name of path to what folder the grader will be running in
+         - Used in:
+            1. Where to place newly created files and folders
 
 3. Make sure your MASTER repo is inside the HW# folder.
    - Additionally, make sure to do "npm install" in the MASTER repo
