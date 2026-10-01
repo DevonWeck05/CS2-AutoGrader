@@ -30,3 +30,35 @@
    - Only MASTER repo remains in HW#/
 
 ===========================================================
+                 DEVELOPMENT BRANCHING
+===========================================================
+
+Creating feature branches off dev:
+   1. git checkout dev
+      - Switch to dev branch
+   2. git pull
+      - Get all new changes
+   3. git checkout -b feature/new-grading-logic
+      - Make the new branch off of dev and switch to it
+
+Developing Feature (normal workflow):
+   1. git add .
+   2. git commit -m "Implement new grading logic"
+   3. git push -u origin feature/new-grading-logic
+      - Only the first time. After just "git push"
+
+When the feature is ready: 
+   1. git checkout dev
+      - Switch to dev branch
+   2. git merge feature/new-grading-logic
+      - Merge feature branch into dev branch
+   3. git push
+
+When dev is stable enough to become the new autograder:
+   1. git checkout main
+      - Switch to main branch
+   2. git merge dev
+      - Merge dev branch into main branch
+   3. git push
+   
+   ===========================================================
