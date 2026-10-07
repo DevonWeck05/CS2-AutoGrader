@@ -58,6 +58,7 @@
    - Submissions.txt contains GitHub usernames for tracking
    - HW#-Failed/ contains all failed repos
    - Failed repo folders use names like hw4-class-methods-*GitHub_Username*
+   - Each failed repo contains a JestLog.txt with the Jest output showing which tests passed and failed
    - HW#-Failed/HW#-Failed-Log.txt contains entries like [FAIL] Student Name | githubUsername
    - Only MASTER repo remains in HW#/
    - RunCnt.txt contains the amount of times the script has been run

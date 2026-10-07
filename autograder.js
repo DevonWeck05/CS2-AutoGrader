@@ -28,7 +28,7 @@ const PASS_FILE = path.join(ROOT_FOLDER, `HW${HW_NUMBER}-PASS.txt`);
 const SUBMISSIONS_FILE = path.join(ROOT_FOLDER, "Submissions.txt");
 const FAILED_FOLDER = path.join(ROOT_FOLDER, `HW${HW_NUMBER}-Failed`);
 const FAILED_LOG = path.join(FAILED_FOLDER, `HW${HW_NUMBER}-Failed-Log.txt`);
-const RUN_FILE = path.join(ROOT_FOLDER, `HW${HW_NUMBER}-Run.txt`);
+const RUN_FILE = path.join(ROOT_FOLDER, `RunCnt${HW_NUMBER}.txt`);
 let runNumber = 0;
 
 fs.mkdirSync(FAILED_FOLDER, { recursive: true });
@@ -140,13 +140,16 @@ function runTests() {
   if (output) process.stdout.write(output);
 
   try {
-    if (!fs.existsSync(reportPath)) return "ERROR";
+    if (!fs.existsSync(reportPath)) return { outcome: "ERROR", log: output };
     const report = JSON.parse(fs.readFileSync(reportPath, "utf8"));
-    if (report.success) return "PASS";
-    return report.numFailedTests > 0 ? "FAIL" : "ERROR";
+    if (report.success) return { outcome: "PASS", log: output };
+    return {
+      outcome: report.numFailedTests > 0 ? "FAIL" : "ERROR",
+      log: output,
+    };
   } catch (error) {
     console.error(`Could not read Jest results: ${error.message}`);
-    return "ERROR";
+    return { outcome: "ERROR", log: output };
   } finally {
     fs.rmSync(reportPath, { force: true });
   }
@@ -267,7 +270,7 @@ for (const repo of repos) {
     fs.rmSync(masterSrc, { recursive: true, force: true });
     fs.renameSync(stagedSrc, masterSrc);
 
-    const outcome = runTests();
+    const { outcome, log } = runTests();
     if (outcome === "PASS") {
       console.log(`PASS: ${studentName}`);
       fs.rmSync(tempRepoPath, { recursive: true, force: true });
@@ -281,6 +284,16 @@ for (const repo of repos) {
       filter: source =>
         !path.relative(MASTER_FOLDER, source).split(path.sep).includes(".git"),
     });
+    if (log) {
+      const jestLog = log
+        .replace(/\u001b\[[0-9;]*m/g, "") // Strip ANSI color codes for a plain-text log.
+        .replace(/^Test results written to:.*(?:\r?\n|$)/gm, "")
+        .replace(/^\s*(?:>.*(?:\r?\n|$))+\s*/, "") // Remove the npm run banner.
+        .trim();
+      if (jestLog) {
+        fs.writeFileSync(path.join(failedPath, "JestLog.txt"), jestLog + "\n");
+      }
+    }
     fs.rmSync(tempRepoPath, { recursive: true, force: true });
     recordOutcome(username, studentName, outcome);
   } catch (error) {
